@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { GoalBrowser } from '@/components/patient/goal-browser';
 
 export default function Home() {
@@ -13,6 +14,23 @@ export default function Home() {
           </p>
         </div>
       </header>
+
+      <section className="max-w-6xl mx-auto px-4 py-6">
+        <Link
+          href="/quiz"
+          className="block rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white shadow-lg shadow-blue-600/20 hover:from-blue-700 hover:to-blue-800 transition"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-bold">Not sure where to start?</h2>
+              <p className="mt-1 text-blue-100">
+                Take our 2-minute health quiz and get personalized test recommendations.
+              </p>
+            </div>
+            <span className="text-3xl hidden sm:block">→</span>
+          </div>
+        </Link>
+      </section>
 
       <section className="max-w-6xl mx-auto px-4 py-8">
         <GoalBrowser />

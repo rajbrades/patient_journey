@@ -1,4 +1,10 @@
 -- Seed data: 10X Health goals and tests
+-- Run AFTER both migrations (001_initial_schema.sql + 002_add_collection_method.sql)
+
+-- Clear existing data (safe for re-seeding)
+delete from goal_test_mappings;
+delete from tests;
+delete from goals;
 
 -- Goals
 insert into goals (name, slug, description, icon, category, sort_order) values
@@ -13,28 +19,35 @@ insert into goals (name, slug, description, icon, category, sort_order) values
   ('Enhance Mental Clarity', 'enhance-mental-clarity', 'Brain fog, poor focus, or mood swings? Identify the biochemical drivers.', '🧠', 'cognitive', 9),
   ('Anti-Aging & Longevity', 'anti-aging-longevity', 'Optimize the biomarkers associated with healthy aging and cellular vitality.', '🕰️', 'longevity', 10);
 
--- Tests
-insert into tests (name, slug, description, category, biomarkers, price_cents) values
-  ('Complete Blood Count (CBC)', 'cbc', 'Measures red and white blood cells, hemoglobin, hematocrit, and platelets.', 'blood', array['WBC', 'RBC', 'Hemoglobin', 'Hematocrit', 'Platelets', 'MCV', 'MCH', 'MCHC'], 4900),
-  ('Comprehensive Metabolic Panel (CMP)', 'cmp', 'Evaluates kidney function, liver function, electrolytes, and blood sugar.', 'blood', array['Glucose', 'BUN', 'Creatinine', 'Sodium', 'Potassium', 'Calcium', 'ALT', 'AST', 'Albumin'], 5900),
-  ('Thyroid Panel', 'thyroid-panel', 'Full thyroid assessment including TSH, Free T3, Free T4, and thyroid antibodies.', 'hormones', array['TSH', 'Free T3', 'Free T4', 'TPO Antibodies', 'Thyroglobulin Antibodies'], 8900),
-  ('Male Hormone Panel', 'male-hormone-panel', 'Comprehensive male hormone testing including testosterone, estradiol, DHEA-S, and more.', 'hormones', array['Total Testosterone', 'Free Testosterone', 'Estradiol', 'DHEA-S', 'SHBG', 'LH', 'FSH', 'Prolactin'], 14900),
-  ('Female Hormone Panel', 'female-hormone-panel', 'Comprehensive female hormone testing including estradiol, progesterone, testosterone, and more.', 'hormones', array['Estradiol', 'Progesterone', 'Total Testosterone', 'Free Testosterone', 'DHEA-S', 'SHBG', 'LH', 'FSH', 'Prolactin'], 14900),
-  ('Iron Panel', 'iron-panel', 'Evaluates iron status including serum iron, ferritin, TIBC, and transferrin saturation.', 'blood', array['Serum Iron', 'Ferritin', 'TIBC', 'Transferrin Saturation'], 5900),
-  ('Vitamin D', 'vitamin-d', 'Measures 25-hydroxyvitamin D levels — critical for immune function, mood, and bone health.', 'vitamins', array['25-OH Vitamin D'], 4900),
-  ('Vitamin B12 & Folate', 'b12-folate', 'Assesses B12 and folate levels important for energy, mood, and neurological function.', 'vitamins', array['Vitamin B12', 'Folate'], 5900),
-  ('Lipid Panel (Advanced)', 'advanced-lipid-panel', 'Advanced cardiovascular markers beyond standard cholesterol.', 'cardiovascular', array['Total Cholesterol', 'LDL', 'HDL', 'Triglycerides', 'VLDL', 'Lp(a)', 'ApoB', 'LDL Particle Number'], 9900),
-  ('hs-CRP & Inflammation', 'hs-crp-inflammation', 'Measures high-sensitivity C-reactive protein and other inflammatory markers.', 'inflammation', array['hs-CRP', 'ESR', 'Homocysteine'], 6900),
-  ('Cortisol (AM)', 'cortisol-am', 'Morning cortisol level to assess adrenal function and stress response.', 'hormones', array['Cortisol (AM)'], 4900),
-  ('HbA1c', 'hba1c', 'Measures average blood sugar over the past 2-3 months.', 'metabolic', array['HbA1c'], 3900),
-  ('Insulin (Fasting)', 'fasting-insulin', 'Evaluates insulin levels to assess metabolic health and insulin resistance.', 'metabolic', array['Fasting Insulin'], 4900),
-  ('DHEA-S', 'dhea-s', 'Measures DHEA-sulfate, an important precursor hormone for both men and women.', 'hormones', array['DHEA-S'], 4900),
-  ('Magnesium (RBC)', 'magnesium-rbc', 'Red blood cell magnesium — more accurate than serum for assessing true magnesium status.', 'vitamins', array['RBC Magnesium'], 4900),
-  ('GI-MAP Stool Test', 'gi-map', 'Comprehensive stool analysis for gut pathogens, parasites, bacterial balance, and digestive function.', 'gut', array['H. pylori', 'Candida', 'Parasites', 'Calprotectin', 'Elastase', 'SIgA', 'Zonulin'], 34900),
-  ('Food Sensitivity Panel', 'food-sensitivity', 'IgG-mediated food sensitivity testing for 96+ common foods.', 'gut', array['IgG Food Antibodies'], 29900),
-  ('Omega-3 Index', 'omega-3-index', 'Measures omega-3 fatty acid levels in red blood cell membranes.', 'cardiovascular', array['Omega-3 Index', 'EPA', 'DHA', 'AA:EPA Ratio'], 9900),
-  ('IGF-1', 'igf-1', 'Insulin-like growth factor 1 — marker for growth hormone activity and longevity.', 'longevity', array['IGF-1'], 5900),
-  ('Comprehensive Wellness Panel', 'comprehensive-wellness', 'Our most complete panel — CBC, CMP, thyroid, hormones, vitamins, lipids, and inflammation markers.', 'comprehensive', array['CBC', 'CMP', 'TSH', 'Free T3', 'Free T4', 'Testosterone', 'Estradiol', 'Vitamin D', 'B12', 'Iron', 'Ferritin', 'hs-CRP', 'HbA1c', 'Lipid Panel'], 29900);
+-- Tests: 10X Health real product catalog
+-- Prices are placeholder — update when real pricing is available
+
+-- Test 1: 74-Biomarker Comprehensive Wellness Panel (in-person phlebotomy)
+insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
+  ('74-Biomarker Comprehensive Wellness Panel', 'comprehensive-wellness-panel', 'Our most complete panel — 74 biomarkers covering blood counts, metabolic function, thyroid, hormones, vitamins, lipids, and inflammation. Traditional full phlebotomy draw performed in person.', 'comprehensive', array['WBC', 'RBC', 'Hemoglobin', 'Hematocrit', 'Platelets', 'MCV', 'MCH', 'MCHC', 'Glucose', 'BUN', 'Creatinine', 'Sodium', 'Potassium', 'Calcium', 'ALT', 'AST', 'Albumin', 'TSH', 'Free T3', 'Free T4', 'Total Testosterone', 'Free Testosterone', 'Estradiol', 'DHEA-S', 'SHBG', 'Cortisol', 'Fasting Insulin', 'HbA1c', 'Vitamin D', 'Vitamin B12', 'Folate', 'Iron', 'Ferritin', 'TIBC', 'Magnesium', 'hs-CRP', 'Homocysteine', 'Total Cholesterol', 'LDL', 'HDL', 'Triglycerides', 'ApoB', 'Lp(a)', 'IGF-1', 'LH', 'FSH', 'Prolactin', 'Progesterone', 'ESR', 'Uric Acid', 'GGT', 'Total Protein', 'Globulin', 'A/G Ratio', 'Total Bilirubin', 'Alkaline Phosphatase', 'CO2', 'Chloride', 'Phosphorus', 'RDW', 'MPV', 'Neutrophils', 'Lymphocytes', 'Monocytes', 'Eosinophils', 'Basophils', 'eGFR', 'BUN/Creatinine Ratio', 'LDL Particle Number', 'Omega-3 Index', 'EPA', 'DHA', 'AA:EPA Ratio', 'Transferrin Saturation', 'VLDL'], 59900, 'in-person', null);
+
+-- Test 2: AHB Blood Collection Device panels (4 separate panels, grouped)
+insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
+  ('AHB Hormone Panel', 'ahb-hormone-panel', 'At-home hormone assessment using the AHB blood collection device. Covers key male and female hormones with 12 biomarkers. No phlebotomy needed.', 'hormones', array['Total Testosterone', 'Free Testosterone', 'Estradiol', 'Progesterone', 'DHEA-S', 'SHBG', 'LH', 'FSH', 'Prolactin', 'Cortisol', 'IGF-1', 'Sex Hormone Panel'], 14900, 'at-home-blood', 'ahb'),
+  ('AHB Cardiometabolic Panel', 'ahb-cardiometabolic', 'At-home cardiometabolic screening using the AHB blood collection device. Evaluates cholesterol, blood sugar, and metabolic risk markers.', 'cardiovascular', array['Total Cholesterol', 'LDL', 'HDL', 'Triglycerides', 'ApoB', 'HbA1c', 'Fasting Insulin', 'Glucose', 'hs-CRP', 'Lp(a)'], 12900, 'at-home-blood', 'ahb'),
+  ('AHB Thyroid Panel', 'ahb-thyroid', 'At-home thyroid assessment using the AHB blood collection device. Complete thyroid function evaluation.', 'hormones', array['TSH', 'Free T3', 'Free T4', 'TPO Antibodies', 'Thyroglobulin Antibodies'], 9900, 'at-home-blood', 'ahb'),
+  ('AHB Peptide Panel', 'ahb-peptide', 'At-home peptide marker assessment using the AHB blood collection device. Evaluates key peptide and growth factor levels.', 'hormones', array['IGF-1', 'Growth Hormone', 'BPC-157 Markers', 'Thymosin Beta-4 Markers', 'C-Peptide'], 11900, 'at-home-blood', 'ahb');
+
+-- Test 3: KBMO FIT 176 Food Sensitivity + Gut Barrier
+insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
+  ('FIT 176 Food Sensitivity & Gut Health Test', 'fit-176-gut-health', 'At-home blood spot test measuring IgG reactivity to 176 foods plus gut barrier function markers. Identifies food sensitivities and intestinal permeability. Powered by KBMO FIT technology.', 'gut', array['176 Food IgG Antibodies', 'Zonulin', 'Candida', 'Gut Barrier Function'], 34900, 'at-home-blood-spot', null);
+
+-- Test 4: Methylation Genetic Test
+insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
+  ('Methylation Genetic Test', 'methylation-genetics', 'At-home saliva collection (cheek swab) analyzing 5 key genes involved in methylation — a critical process for detox, energy production, and neurotransmitter function.', 'genetics', array['MTHFR C677T', 'MTHFR A1298C', 'MTR', 'MTRR', 'COMT'], 19900, 'at-home-saliva', null);
+
+-- Test 5: Precision Genetics Test
+insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
+  ('Precision Genetics Test', 'precision-genetics', 'At-home saliva collection evaluating 54 genes to determine which foods optimize your health and which support weight loss — personalized nutrition based on your DNA.', 'genetics', array['54 Nutrition-Related Genes', 'Carbohydrate Metabolism Genes', 'Fat Metabolism Genes', 'Protein Metabolism Genes', 'Micronutrient Genes', 'Food Sensitivity Genes', 'Weight Management Genes'], 24900, 'at-home-saliva', null);
+
+-- Test 6: MitoScreen Mitochondrial Health Test
+insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
+  ('MitoScreen Mitochondrial Health Test', 'mitoscreen', 'At-home blood test evaluating mitochondrial function — the powerhouse of your cells. Assesses energy production capacity, oxidative stress, and cellular vitality.', 'mitochondrial', array['CoQ10', 'NAD+', 'Mitochondrial DNA Copy Number', 'Oxidative Stress Markers', 'Lactate', 'Pyruvate', 'L-Carnitine'], 19900, 'at-home-blood', null);
 
 -- Goal-Test Mappings
 
@@ -42,13 +55,11 @@ insert into tests (name, slug, description, category, biomarkers, price_cents) v
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('increase-energy', 'thyroid-panel', 'primary', 'Thyroid dysfunction is the #1 overlooked cause of fatigue', 1),
-  ('increase-energy', 'iron-panel', 'primary', 'Iron deficiency anemia is a leading cause of low energy', 2),
-  ('increase-energy', 'b12-folate', 'primary', 'B12 deficiency causes fatigue and brain fog', 3),
-  ('increase-energy', 'cbc', 'primary', 'Rules out anemia and blood cell abnormalities', 4),
-  ('increase-energy', 'vitamin-d', 'secondary', 'Low vitamin D is associated with fatigue and low mood', 5),
-  ('increase-energy', 'cortisol-am', 'secondary', 'Abnormal cortisol patterns cause energy crashes', 6),
-  ('increase-energy', 'cmp', 'secondary', 'Checks blood sugar, electrolytes, and organ function', 7)
+  ('increase-energy', 'comprehensive-wellness-panel', 'primary', 'The 74-biomarker panel covers thyroid, iron, B12, and metabolic markers — the top causes of fatigue', 1),
+  ('increase-energy', 'mitoscreen', 'primary', 'Mitochondrial dysfunction is a root cause of low cellular energy production', 2),
+  ('increase-energy', 'ahb-thyroid', 'primary', 'Thyroid dysfunction is the #1 overlooked cause of fatigue — convenient at-home option', 3),
+  ('increase-energy', 'ahb-hormone-panel', 'secondary', 'Hormonal imbalances (low testosterone, high cortisol) contribute to chronic fatigue', 4),
+  ('increase-energy', 'methylation-genetics', 'secondary', 'Methylation gene variants (MTHFR) can impair energy metabolism and B-vitamin utilization', 5)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -57,12 +68,11 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('evaluate-hormones', 'male-hormone-panel', 'primary', 'Complete male hormonal assessment', 1),
-  ('evaluate-hormones', 'female-hormone-panel', 'primary', 'Complete female hormonal assessment', 2),
-  ('evaluate-hormones', 'thyroid-panel', 'primary', 'Thyroid is central to hormonal balance', 3),
-  ('evaluate-hormones', 'cortisol-am', 'primary', 'Cortisol impacts all other hormones', 4),
-  ('evaluate-hormones', 'dhea-s', 'secondary', 'Key precursor hormone for testosterone and estrogen', 5),
-  ('evaluate-hormones', 'fasting-insulin', 'secondary', 'Insulin resistance disrupts hormonal balance', 6)
+  ('evaluate-hormones', 'comprehensive-wellness-panel', 'primary', 'Full hormone panel including testosterone, estradiol, DHEA-S, thyroid, cortisol, and more', 1),
+  ('evaluate-hormones', 'ahb-hormone-panel', 'primary', 'Convenient at-home hormone assessment covering 12 key biomarkers', 2),
+  ('evaluate-hormones', 'ahb-thyroid', 'primary', 'Thyroid is central to hormonal balance — complete thyroid panel from home', 3),
+  ('evaluate-hormones', 'ahb-peptide', 'secondary', 'Peptide and growth factor levels influence hormone signaling and recovery', 4),
+  ('evaluate-hormones', 'methylation-genetics', 'secondary', 'COMT gene affects estrogen metabolism and neurotransmitter breakdown', 5)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -71,11 +81,10 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('improve-gut-health', 'gi-map', 'primary', 'Gold standard for comprehensive gut assessment', 1),
-  ('improve-gut-health', 'food-sensitivity', 'primary', 'Identifies immune reactions to common foods', 2),
-  ('improve-gut-health', 'cmp', 'secondary', 'Checks liver function and nutrient absorption markers', 3),
-  ('improve-gut-health', 'vitamin-d', 'secondary', 'Vitamin D is critical for gut barrier integrity', 4),
-  ('improve-gut-health', 'hs-crp-inflammation', 'secondary', 'Systemic inflammation often originates in the gut', 5)
+  ('improve-gut-health', 'fit-176-gut-health', 'primary', 'Gold standard for identifying food sensitivities and gut barrier dysfunction', 1),
+  ('improve-gut-health', 'comprehensive-wellness-panel', 'primary', 'Reveals inflammation markers, nutrient deficiencies, and liver function tied to gut health', 2),
+  ('improve-gut-health', 'precision-genetics', 'secondary', 'Genetic insights into food sensitivities and nutrient metabolism guide dietary changes', 3),
+  ('improve-gut-health', 'methylation-genetics', 'secondary', 'Methylation affects detoxification pathways that support gut healing', 4)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -84,14 +93,12 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('optimize-performance', 'cbc', 'primary', 'Oxygen-carrying capacity and recovery markers', 1),
-  ('optimize-performance', 'iron-panel', 'primary', 'Iron is essential for oxygen transport and endurance', 2),
-  ('optimize-performance', 'male-hormone-panel', 'primary', 'Testosterone drives muscle recovery and growth', 3),
-  ('optimize-performance', 'hs-crp-inflammation', 'primary', 'Tracks overtraining and recovery status', 4),
-  ('optimize-performance', 'magnesium-rbc', 'secondary', 'Magnesium is critical for muscle function and recovery', 5),
-  ('optimize-performance', 'vitamin-d', 'secondary', 'Affects muscle strength and injury risk', 6),
-  ('optimize-performance', 'cortisol-am', 'secondary', 'Monitors stress load from training', 7),
-  ('optimize-performance', 'omega-3-index', 'secondary', 'Anti-inflammatory support for recovery', 8)
+  ('optimize-performance', 'comprehensive-wellness-panel', 'primary', 'Complete view of hormones, inflammation, iron, and recovery markers for athletes', 1),
+  ('optimize-performance', 'ahb-hormone-panel', 'primary', 'Track testosterone, cortisol, and growth factors that drive recovery and growth', 2),
+  ('optimize-performance', 'mitoscreen', 'primary', 'Mitochondrial health directly impacts endurance, power output, and recovery', 3),
+  ('optimize-performance', 'ahb-cardiometabolic', 'secondary', 'Metabolic efficiency and cardiovascular markers affect athletic capacity', 4),
+  ('optimize-performance', 'precision-genetics', 'secondary', 'DNA-based nutrition guidance optimizes fueling strategy for performance', 5),
+  ('optimize-performance', 'ahb-peptide', 'secondary', 'Peptide markers inform recovery protocols and tissue repair capacity', 6)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -100,13 +107,12 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('support-weight-management', 'thyroid-panel', 'primary', 'Thyroid controls metabolic rate', 1),
-  ('support-weight-management', 'fasting-insulin', 'primary', 'Insulin resistance is the #1 driver of weight gain', 2),
-  ('support-weight-management', 'hba1c', 'primary', 'Reveals long-term blood sugar control', 3),
-  ('support-weight-management', 'cmp', 'primary', 'Checks blood sugar and liver function', 4),
-  ('support-weight-management', 'cortisol-am', 'secondary', 'High cortisol promotes belly fat storage', 5),
-  ('support-weight-management', 'male-hormone-panel', 'secondary', 'Low testosterone is linked to weight gain in men', 6),
-  ('support-weight-management', 'female-hormone-panel', 'secondary', 'Hormonal imbalances affect weight in women', 7)
+  ('support-weight-management', 'comprehensive-wellness-panel', 'primary', 'Covers thyroid, insulin, HbA1c, hormones — the key metabolic drivers of weight', 1),
+  ('support-weight-management', 'precision-genetics', 'primary', 'Identifies which foods support weight loss based on your specific DNA profile', 2),
+  ('support-weight-management', 'ahb-cardiometabolic', 'primary', 'Tracks insulin resistance, blood sugar, and metabolic risk from home', 3),
+  ('support-weight-management', 'ahb-thyroid', 'secondary', 'Thyroid controls metabolic rate — an underdiagnosed cause of weight gain', 4),
+  ('support-weight-management', 'ahb-hormone-panel', 'secondary', 'Hormonal imbalances (low T, high cortisol) promote fat storage', 5),
+  ('support-weight-management', 'fit-176-gut-health', 'secondary', 'Food sensitivities and gut inflammation can stall weight loss', 6)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -115,12 +121,10 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('boost-immune-health', 'vitamin-d', 'primary', 'Vitamin D is the most important immune-regulating nutrient', 1),
-  ('boost-immune-health', 'cbc', 'primary', 'White blood cell count and differential assess immune function', 2),
-  ('boost-immune-health', 'hs-crp-inflammation', 'primary', 'Chronic inflammation suppresses immune response', 3),
-  ('boost-immune-health', 'iron-panel', 'secondary', 'Iron is needed for immune cell proliferation', 4),
-  ('boost-immune-health', 'b12-folate', 'secondary', 'B12 deficiency impairs immune function', 5),
-  ('boost-immune-health', 'magnesium-rbc', 'secondary', 'Magnesium supports immune signaling', 6)
+  ('boost-immune-health', 'comprehensive-wellness-panel', 'primary', 'WBC counts, vitamin D, iron, and inflammation markers assess immune readiness', 1),
+  ('boost-immune-health', 'fit-176-gut-health', 'primary', '70% of immune function lives in the gut — identify sensitivities and barrier issues', 2),
+  ('boost-immune-health', 'mitoscreen', 'secondary', 'Mitochondrial health supports immune cell energy and function', 3),
+  ('boost-immune-health', 'methylation-genetics', 'secondary', 'Methylation supports immune signaling and detoxification pathways', 4)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -129,12 +133,11 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('improve-sleep', 'cortisol-am', 'primary', 'Dysregulated cortisol rhythm disrupts sleep', 1),
-  ('improve-sleep', 'magnesium-rbc', 'primary', 'Magnesium deficiency is a common cause of insomnia', 2),
-  ('improve-sleep', 'thyroid-panel', 'primary', 'Hyperthyroidism causes insomnia; hypothyroidism causes excessive sleepiness', 3),
-  ('improve-sleep', 'iron-panel', 'secondary', 'Iron deficiency is linked to restless leg syndrome', 4),
-  ('improve-sleep', 'vitamin-d', 'secondary', 'Low vitamin D is associated with poor sleep quality', 5),
-  ('improve-sleep', 'b12-folate', 'secondary', 'B12 helps regulate circadian rhythm', 6)
+  ('improve-sleep', 'comprehensive-wellness-panel', 'primary', 'Cortisol, magnesium, thyroid, and iron — the key sleep-disrupting biomarkers', 1),
+  ('improve-sleep', 'ahb-hormone-panel', 'primary', 'Cortisol rhythm and hormone balance directly regulate sleep cycles', 2),
+  ('improve-sleep', 'ahb-thyroid', 'secondary', 'Hyperthyroidism causes insomnia; hypothyroidism causes excessive sleepiness', 3),
+  ('improve-sleep', 'methylation-genetics', 'secondary', 'COMT gene variants affect neurotransmitter breakdown impacting sleep quality', 4),
+  ('improve-sleep', 'mitoscreen', 'secondary', 'Cellular energy dysfunction can cause fatigue without restorative sleep', 5)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -143,12 +146,10 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('assess-heart-health', 'advanced-lipid-panel', 'primary', 'Advanced lipid markers give a complete cardiovascular picture', 1),
-  ('assess-heart-health', 'hs-crp-inflammation', 'primary', 'Inflammation is a key driver of heart disease', 2),
-  ('assess-heart-health', 'hba1c', 'primary', 'Diabetes significantly increases cardiovascular risk', 3),
-  ('assess-heart-health', 'omega-3-index', 'primary', 'Omega-3 levels are inversely correlated with heart disease risk', 4),
-  ('assess-heart-health', 'cmp', 'secondary', 'Checks electrolytes and kidney function relevant to heart health', 5),
-  ('assess-heart-health', 'fasting-insulin', 'secondary', 'Insulin resistance is a major CVD risk factor', 6)
+  ('assess-heart-health', 'comprehensive-wellness-panel', 'primary', 'Advanced lipids, hs-CRP, HbA1c, homocysteine — complete cardiovascular risk picture', 1),
+  ('assess-heart-health', 'ahb-cardiometabolic', 'primary', 'Convenient at-home cardiometabolic panel with ApoB, Lp(a), and metabolic markers', 2),
+  ('assess-heart-health', 'precision-genetics', 'secondary', 'Genetic variants affecting cholesterol metabolism and cardiovascular risk', 3),
+  ('assess-heart-health', 'methylation-genetics', 'secondary', 'MTHFR variants affect homocysteine levels — a key cardiovascular risk factor', 4)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -157,13 +158,11 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('enhance-mental-clarity', 'thyroid-panel', 'primary', 'Brain fog is a hallmark symptom of thyroid dysfunction', 1),
-  ('enhance-mental-clarity', 'b12-folate', 'primary', 'B12 deficiency causes cognitive impairment', 2),
-  ('enhance-mental-clarity', 'iron-panel', 'primary', 'Iron deficiency reduces oxygen delivery to the brain', 3),
-  ('enhance-mental-clarity', 'vitamin-d', 'secondary', 'Low vitamin D is linked to cognitive decline', 4),
-  ('enhance-mental-clarity', 'omega-3-index', 'secondary', 'Omega-3s are essential for brain cell membrane integrity', 5),
-  ('enhance-mental-clarity', 'cortisol-am', 'secondary', 'Chronic stress impairs memory and focus', 6),
-  ('enhance-mental-clarity', 'magnesium-rbc', 'secondary', 'Magnesium supports neurotransmitter function', 7)
+  ('enhance-mental-clarity', 'comprehensive-wellness-panel', 'primary', 'Thyroid, B12, iron, vitamin D, and inflammation — the top biochemical drivers of brain fog', 1),
+  ('enhance-mental-clarity', 'methylation-genetics', 'primary', 'MTHFR and COMT gene variants directly affect neurotransmitter production and cognitive function', 2),
+  ('enhance-mental-clarity', 'mitoscreen', 'primary', 'Brain cells are the most mitochondria-dense — cellular energy drives mental clarity', 3),
+  ('enhance-mental-clarity', 'ahb-thyroid', 'secondary', 'Brain fog is a hallmark symptom of thyroid dysfunction', 4),
+  ('enhance-mental-clarity', 'ahb-hormone-panel', 'secondary', 'Cortisol and hormone imbalances impair memory and focus', 5)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;
@@ -172,14 +171,13 @@ join tests t on t.slug = m.test_slug;
 insert into goal_test_mappings (goal_id, test_id, relevance, rationale, sort_order)
 select g.id, t.id, m.relevance, m.rationale, m.sort_order
 from (values
-  ('anti-aging-longevity', 'comprehensive-wellness', 'primary', 'Broad baseline of all key longevity biomarkers', 1),
-  ('anti-aging-longevity', 'igf-1', 'primary', 'Growth hormone marker linked to cellular aging', 2),
-  ('anti-aging-longevity', 'hs-crp-inflammation', 'primary', 'Chronic inflammation accelerates aging', 3),
-  ('anti-aging-longevity', 'hba1c', 'primary', 'Glycemic control is a top longevity predictor', 4),
-  ('anti-aging-longevity', 'fasting-insulin', 'primary', 'Insulin sensitivity is key to metabolic longevity', 5),
-  ('anti-aging-longevity', 'omega-3-index', 'secondary', 'Higher omega-3 levels associated with longer telomeres', 6),
-  ('anti-aging-longevity', 'vitamin-d', 'secondary', 'Optimal vitamin D linked to reduced all-cause mortality', 7),
-  ('anti-aging-longevity', 'dhea-s', 'secondary', 'DHEA-S declines with age — a key aging biomarker', 8)
+  ('anti-aging-longevity', 'comprehensive-wellness-panel', 'primary', 'Broad baseline of all key longevity biomarkers — inflammation, metabolic, hormonal', 1),
+  ('anti-aging-longevity', 'mitoscreen', 'primary', 'Mitochondrial decline is a hallmark of aging — assess and optimize cellular vitality', 2),
+  ('anti-aging-longevity', 'methylation-genetics', 'primary', 'Methylation efficiency declines with age and affects DNA repair and detox', 3),
+  ('anti-aging-longevity', 'ahb-peptide', 'primary', 'Growth factors and peptide markers are key indicators of biological age', 4),
+  ('anti-aging-longevity', 'ahb-hormone-panel', 'secondary', 'Hormone optimization is a cornerstone of longevity protocols', 5),
+  ('anti-aging-longevity', 'precision-genetics', 'secondary', 'DNA-guided nutrition supports long-term health optimization', 6),
+  ('anti-aging-longevity', 'ahb-cardiometabolic', 'secondary', 'Metabolic health is a top predictor of healthspan and lifespan', 7)
 ) as m(goal_slug, test_slug, relevance, rationale, sort_order)
 join goals g on g.slug = m.goal_slug
 join tests t on t.slug = m.test_slug;

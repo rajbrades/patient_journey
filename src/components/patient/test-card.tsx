@@ -4,16 +4,28 @@ interface TestCardProps {
   test: Test & { relevance: 'primary' | 'secondary'; rationale: string | null };
 }
 
+const collectionLabels: Record<string, { label: string; icon: string }> = {
+  'in-person': { label: 'In-Person Draw', icon: '🏥' },
+  'at-home-blood': { label: 'At-Home Blood', icon: '🩸' },
+  'at-home-saliva': { label: 'At-Home Saliva', icon: '🧪' },
+  'at-home-blood-spot': { label: 'At-Home Blood Spot', icon: '💧' },
+};
+
 export function TestCard({ test }: TestCardProps) {
   const price = test.price_cents
     ? `$${(test.price_cents / 100).toFixed(0)}`
     : null;
 
+  const collection = collectionLabels[test.collection_method] || {
+    label: test.collection_method,
+    icon: '🔬',
+  };
+
   return (
     <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <h3 className="text-lg font-semibold text-gray-900">{test.name}</h3>
             <span
               className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
@@ -23,6 +35,9 @@ export function TestCard({ test }: TestCardProps) {
               }`}
             >
               {test.relevance}
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700">
+              {collection.icon} {collection.label}
             </span>
           </div>
           <p className="mt-1 text-sm text-gray-500">{test.description}</p>

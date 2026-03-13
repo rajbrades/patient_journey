@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import type { Goal } from '@/types';
 
 export default function AdminGoalsPage() {
@@ -129,6 +130,7 @@ export default function AdminGoalsPage() {
                   </div>
                 </div>
                 <div className="flex gap-2">
+                  <Link href={`/admin/goals/${goal.id}/mappings`} className="text-sm text-green-600 hover:underline">Manage Tests</Link>
                   <button onClick={() => startEdit(goal)} className="text-sm text-blue-600 hover:underline">Edit</button>
                   <button onClick={() => handleDelete(goal.id)} className="text-sm text-red-600 hover:underline">Delete</button>
                 </div>

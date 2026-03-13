@@ -9,7 +9,7 @@ export default function AdminTestsPage() {
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: '', slug: '', description: '', category: 'general',
-    biomarkers: '', price_cents: '',
+    biomarkers: '', price_cents: '', collection_method: 'in-person', test_group: '',
   });
   const [showNew, setShowNew] = useState(false);
 
@@ -35,6 +35,8 @@ export default function AdminTestsPage() {
       category: form.category,
       biomarkers: form.biomarkers.split(',').map((b) => b.trim()).filter(Boolean),
       price_cents: form.price_cents ? parseInt(form.price_cents, 10) : null,
+      collection_method: form.collection_method,
+      test_group: form.test_group || null,
     };
   }
 
@@ -46,7 +48,7 @@ export default function AdminTestsPage() {
     });
     if (res.ok) {
       setShowNew(false);
-      setForm({ name: '', slug: '', description: '', category: 'general', biomarkers: '', price_cents: '' });
+      setForm({ name: '', slug: '', description: '', category: 'general', biomarkers: '', price_cents: '', collection_method: 'in-person', test_group: '' });
       fetchTests();
     }
   }
@@ -78,10 +80,12 @@ export default function AdminTestsPage() {
       category: test.category,
       biomarkers: test.biomarkers.join(', '),
       price_cents: test.price_cents?.toString() || '',
+      collection_method: test.collection_method || 'in-person',
+      test_group: test.test_group || '',
     });
   }
 
-  const emptyForm = { name: '', slug: '', description: '', category: 'general', biomarkers: '', price_cents: '' };
+  const emptyForm = { name: '', slug: '', description: '', category: 'general', biomarkers: '', price_cents: '', collection_method: 'in-person', test_group: '' };
 
   const formFields = (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -89,6 +93,13 @@ export default function AdminTestsPage() {
       <input placeholder="Slug (auto-generated)" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} className="rounded-lg border px-3 py-2 text-sm" />
       <input placeholder="Category" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="rounded-lg border px-3 py-2 text-sm" />
       <input placeholder="Price (cents)" value={form.price_cents} onChange={(e) => setForm({ ...form, price_cents: e.target.value })} className="rounded-lg border px-3 py-2 text-sm" type="number" />
+      <select value={form.collection_method} onChange={(e) => setForm({ ...form, collection_method: e.target.value })} className="rounded-lg border px-3 py-2 text-sm bg-white">
+        <option value="in-person">In-Person Draw</option>
+        <option value="at-home-blood">At-Home Blood</option>
+        <option value="at-home-saliva">At-Home Saliva</option>
+        <option value="at-home-blood-spot">At-Home Blood Spot</option>
+      </select>
+      <input placeholder="Test Group (e.g. ahb)" value={form.test_group} onChange={(e) => setForm({ ...form, test_group: e.target.value })} className="rounded-lg border px-3 py-2 text-sm" />
       <input placeholder="Biomarkers (comma separated)" value={form.biomarkers} onChange={(e) => setForm({ ...form, biomarkers: e.target.value })} className="rounded-lg border px-3 py-2 text-sm sm:col-span-2" />
       <textarea placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="rounded-lg border px-3 py-2 text-sm sm:col-span-2" rows={2} />
     </div>
@@ -139,6 +150,8 @@ export default function AdminTestsPage() {
                   <p className="text-sm text-gray-500">
                     {test.category} &middot; {test.biomarkers.length} biomarkers
                     {test.price_cents ? ` · $${(test.price_cents / 100).toFixed(0)}` : ''}
+                    {' · '}{test.collection_method?.replace(/-/g, ' ') || 'in-person'}
+                    {test.test_group ? ` · ${test.test_group.toUpperCase()}` : ''}
                   </p>
                 </div>
                 <div className="flex gap-2">
