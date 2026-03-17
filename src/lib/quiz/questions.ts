@@ -18,7 +18,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "hormones",
         label: "Hormone Balance",
-        icon: "🧬",
+        icon: "🧪",
         goalWeights: { "evaluate-hormones": 3 },
       },
       {
