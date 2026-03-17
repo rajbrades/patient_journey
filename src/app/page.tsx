@@ -1,10 +1,19 @@
 import Link from "next/link";
 import { GoalBrowser } from "@/components/patient/goal-browser";
+import { BrandLogo } from "@/components/ui/brand-logo";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100">
+      <nav className="bg-white border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 py-5 flex items-center justify-between">
+          <BrandLogo />
+          <span className="text-sm font-medium text-gray-400 max-sm:hidden">
+            Stop Guessing, Start Knowing.
+          </span>
+        </div>
+      </nav>
+      <header className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
             Stop guessing about your health. Start knowing.

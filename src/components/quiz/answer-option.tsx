@@ -19,7 +19,7 @@ export function AnswerOption({
       onClick={onToggle}
       className={`relative flex items-center gap-3 border-2 p-4 text-left transition-colors duration-200 ${
         selected
-          ? "border-black bg-white shadow-[4px_4px_0_0_#000] z-10"
+          ? "border-brand bg-white z-10"
           : "border-black bg-white hover:bg-gray-50 hover:z-10"
       }`}
     >
