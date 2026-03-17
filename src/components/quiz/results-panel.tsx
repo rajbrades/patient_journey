@@ -86,7 +86,7 @@ function ResultCard({
     <div
       className={`w-full rounded-2xl border p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-md ${
         highlighted
-          ? 'border-brand/30 bg-brand-light shadow-sm'
+          ? 'border-brand/30 bg-white shadow-sm'
           : 'border-gray-100 bg-white'
       }`}
     >
