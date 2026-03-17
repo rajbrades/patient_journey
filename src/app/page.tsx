@@ -36,7 +36,7 @@ export default function Home() {
         >
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-[20px] max-sm:text-[12px] font-heading uppercase font-bold text-white">Not sure where to start?</h2>
+              <h2 className="text-[20px] max-sm:text-[12px] font-heading uppercase font-bold text-white">I DON'T KNOW WHERE TO START</h2>
               <p
                 className="mt-1 text-white/80"
                 style={{ fontFamily: "var(--font-inter)" }}
