@@ -134,7 +134,7 @@ export function computeRecommendations(input: ScoringInput): ScoredTest[] {
 function getBudgetCeiling(pref: string | null): number | null {
   switch (pref) {
     case 'low': return 30000;   // Under $300 — covers AHB panels
-    case 'mid': return 70000;   // $300–$700 — covers FIT 176, comprehensive, MGT, MitoScreen
+    case 'mid': return 70000;   // $300–$700 — covers 10X Gut Health Test, comprehensive, MGT, MitoScreen
     case 'high': return 100000; // $700–$1,000 — excludes PGT ($1,299)
     default: return null;       // unlimited — all tests eligible
   }

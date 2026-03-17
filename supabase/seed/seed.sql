@@ -33,9 +33,9 @@ insert into tests (name, slug, description, category, biomarkers, price_cents, c
   ('AHB Thyroid Panel', 'ahb-thyroid', 'At-home thyroid assessment using the AHB blood collection device. Complete thyroid function evaluation.', 'hormones', array['TSH', 'Free T3', 'Free T4', 'TPO Antibodies', 'Thyroglobulin Antibodies'], 9900, 'at-home-blood', 'ahb'),
   ('AHB Peptide Panel', 'ahb-peptide', 'At-home peptide marker assessment using the AHB blood collection device. Evaluates key peptide and growth factor levels.', 'hormones', array['IGF-1', 'Growth Hormone', 'BPC-157 Markers', 'Thymosin Beta-4 Markers', 'C-Peptide'], 11900, 'at-home-blood', 'ahb');
 
--- Test 3: KBMO FIT 176 Food Sensitivity + Gut Barrier
+-- Test 3: 10X Gut Health Test (powered by KBMO FIT 176)
 insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
-  ('FIT 176 Food Sensitivity & Gut Health Test', 'fit-176-gut-health', 'At-home blood spot test measuring IgG reactivity to 176 foods plus gut barrier function markers. Identifies food sensitivities and intestinal permeability. Powered by KBMO FIT technology.', 'gut', array['176 Food IgG Antibodies', 'Zonulin', 'Candida', 'Gut Barrier Function'], 34900, 'at-home-blood-spot', null);
+  ('10X Gut Health Test', 'fit-176-gut-health', 'At-home finger-stick test measuring IgG and Immune Complex reactivity to 176 foods, colorings, and additives — plus the KBMO Gut Barrier Panel (Candida, Zonulin, Occludin, LPS) to assess intestinal permeability and leaky gut. Patented dual-pathway technology more sensitive than IgG-only tests.', 'gut', array['176 Food IgG + Immune Complex Antibodies', 'Candida', 'Zonulin', 'Occludin', 'LPS'], 34900, 'at-home-blood-spot', null);
 
 -- Test 4: Methylation Genetic Test
 insert into tests (name, slug, description, category, biomarkers, price_cents, collection_method, test_group) values
