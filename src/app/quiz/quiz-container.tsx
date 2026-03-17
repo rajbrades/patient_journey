@@ -1,30 +1,34 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import type { GoalWithTests, ScoredTest } from '@/types';
-import { quizQuestions } from '@/lib/quiz/questions';
-import { computeRecommendations, extractPreferences, extractGoalScores } from '@/lib/quiz/scoring';
-import { ProgressBar } from '@/components/quiz/progress-bar';
-import { QuestionCard } from '@/components/quiz/question-card';
-import { ResultsPanel } from '@/components/quiz/results-panel';
-import { LeadCaptureForm } from '@/components/quiz/lead-capture-form';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import type { GoalWithTests, ScoredTest } from "@/types";
+import { quizQuestions } from "@/lib/quiz/questions";
+import {
+  computeRecommendations,
+  extractPreferences,
+  extractGoalScores,
+} from "@/lib/quiz/scoring";
+import { ProgressBar } from "@/components/quiz/progress-bar";
+import { QuestionCard } from "@/components/quiz/question-card";
+import { ResultsPanel } from "@/components/quiz/results-panel";
+import { LeadCaptureForm } from "@/components/quiz/lead-capture-form";
 
-type Phase = 'loading' | 'quiz' | 'results' | 'lead-capture' | 'thank-you';
+type Phase = "loading" | "quiz" | "results" | "lead-capture" | "thank-you";
 
 export default function QuizContainer() {
-  const [phase, setPhase] = useState<Phase>('loading');
+  const [phase, setPhase] = useState<Phase>("loading");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string[]>>({});
   const [goalsWithTests, setGoalsWithTests] = useState<GoalWithTests[]>([]);
   const [recommendations, setRecommendations] = useState<ScoredTest[]>([]);
 
   useEffect(() => {
-    fetch('/api/quiz/data')
+    fetch("/api/quiz/data")
       .then((res) => res.json())
       .then((data) => {
         setGoalsWithTests(data);
-        setPhase('quiz');
+        setPhase("quiz");
       });
   }, []);
 
@@ -35,14 +39,17 @@ export default function QuizContainer() {
     const qId = currentQuestion.id;
     const current = answers[qId] || [];
 
-    if (currentQuestion.type === 'single-select') {
+    if (currentQuestion.type === "single-select") {
       setAnswers({ ...answers, [qId]: [optionId] });
       return;
     }
 
     // Multi-select toggle
     if (current.includes(optionId)) {
-      setAnswers({ ...answers, [qId]: current.filter((id) => id !== optionId) });
+      setAnswers({
+        ...answers,
+        [qId]: current.filter((id) => id !== optionId),
+      });
     } else {
       setAnswers({ ...answers, [qId]: [...current, optionId] });
     }
@@ -59,7 +66,7 @@ export default function QuizContainer() {
         goalsWithTests,
       });
       setRecommendations(results);
-      setPhase('results');
+      setPhase("results");
     }
   }
 
@@ -75,12 +82,15 @@ export default function QuizContainer() {
     email: string;
     phone: string;
   }) {
-    const { collectionPreference, budgetPreference } = extractPreferences(answers, quizQuestions);
+    const { collectionPreference, budgetPreference } = extractPreferences(
+      answers,
+      quizQuestions,
+    );
     const goalScores = extractGoalScores(answers, quizQuestions);
 
-    await fetch('/api/quiz/leads', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("/api/quiz/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...data,
         quiz_answers: answers,
@@ -92,25 +102,28 @@ export default function QuizContainer() {
       }),
     });
 
-    setPhase('thank-you');
+    setPhase("thank-you");
   }
 
-  if (phase === 'loading') {
+  if (phase === "loading") {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="animate-pulse text-center">
-          <div className="h-8 w-48 bg-gray-200 rounded-lg mx-auto mb-4" />
-          <div className="h-4 w-64 bg-gray-100 rounded mx-auto" />
+          <div className="h-8 w-48 bg-gray-200 mx-auto mb-4" />
+          <div className="h-4 w-64 bg-gray-100 mx-auto" />
         </div>
       </div>
     );
   }
 
-  if (phase === 'quiz') {
+  if (phase === "quiz") {
     return (
       <div className="px-4 py-8">
         <div className="max-w-2xl mx-auto mb-10">
-          <ProgressBar currentStep={step + 1} totalSteps={quizQuestions.length} />
+          <ProgressBar
+            currentStep={step + 1}
+            totalSteps={quizQuestions.length}
+          />
         </div>
         <QuestionCard
           question={currentQuestion}
@@ -125,18 +138,18 @@ export default function QuizContainer() {
     );
   }
 
-  if (phase === 'results') {
+  if (phase === "results") {
     return (
       <div className="px-4 py-8">
         <ResultsPanel
           recommendations={recommendations}
-          onContinue={() => setPhase('lead-capture')}
+          onContinue={() => setPhase("lead-capture")}
         />
       </div>
     );
   }
 
-  if (phase === 'lead-capture') {
+  if (phase === "lead-capture") {
     return (
       <div className="px-4 py-8">
         <LeadCaptureForm onSubmit={handleLeadSubmit} />
@@ -152,13 +165,14 @@ export default function QuizContainer() {
         You&apos;re on your way to feeling better.
       </h2>
       <p className="text-gray-500 mb-8">
-        A member of our wellness team will reach out soon with your personalized health plan
-        and clear next steps — no guesswork, just answers tailored to you.
+        A member of our wellness team will reach out soon with your personalized
+        health plan and clear next steps — no guesswork, just answers tailored
+        to you.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           href="/"
-          className="rounded-xl bg-brand px-6 py-3 text-sm font-medium text-white hover:bg-brand-dark transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/30"
+          className="border-2 border-brand bg-brand px-6 py-3 text-sm font-medium text-white hover:bg-brand-dark transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid-brand"
         >
           Explore Health Goals
         </Link>
@@ -168,9 +182,9 @@ export default function QuizContainer() {
             setAnswers({});
             setStep(0);
             setRecommendations([]);
-            setPhase('quiz');
+            setPhase("quiz");
           }}
-          className="rounded-xl bg-gray-100 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-200 transition"
+          className="border-2 border-black bg-white px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid"
         >
           Retake Quiz
         </button>

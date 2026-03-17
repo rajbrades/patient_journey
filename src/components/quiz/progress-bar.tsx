@@ -14,9 +14,9 @@ export function ProgressBar({ currentStep, totalSteps }: ProgressBarProps) {
         </span>
         <span className="text-sm font-medium text-gray-400">{percent}%</span>
       </div>
-      <div className="h-2 w-full rounded-full bg-gray-200">
+      <div className="h-2 w-full  bg-gray-200">
         <div
-          className="h-2 rounded-full bg-brand transition-all duration-300 ease-out"
+          className="h-2  bg-brand transition-all duration-300 ease-out"
           style={{ width: `${percent}%` }}
         />
       </div>

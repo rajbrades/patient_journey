@@ -1,4 +1,10 @@
-import type { GoalWithTests, QuizQuestion, QuizOption, ScoredTest, Test } from '@/types';
+import type {
+  GoalWithTests,
+  QuizQuestion,
+  QuizOption,
+  ScoredTest,
+  Test,
+} from "@/types";
 
 interface ScoringInput {
   answers: Record<string, string[]>;
@@ -36,17 +42,20 @@ export function computeRecommendations(input: ScoringInput): ScoredTest[] {
       }
 
       // Preference flags
-      if (option.preferenceFlag && question.id === 'collection-preference') {
+      if (option.preferenceFlag && question.id === "collection-preference") {
         collectionPreference = option.preferenceFlag;
       }
-      if (option.preferenceFlag && question.id === 'budget') {
+      if (option.preferenceFlag && question.id === "budget") {
         budgetPreference = option.preferenceFlag;
       }
     }
   }
 
   // Stage B: Convert goal scores to test scores via mappings
-  const testScoreMap: Record<string, { score: number; matchedGoals: string[]; rationale: string[] }> = {};
+  const testScoreMap: Record<
+    string,
+    { score: number; matchedGoals: string[]; rationale: string[] }
+  > = {};
   const testDataMap: Record<string, Test> = {};
 
   for (const goal of goalsWithTests) {
@@ -54,7 +63,7 @@ export function computeRecommendations(input: ScoringInput): ScoredTest[] {
     if (gScore === 0) continue;
 
     for (const test of goal.tests) {
-      const relevanceMultiplier = test.relevance === 'primary' ? 2 : 1;
+      const relevanceMultiplier = test.relevance === "primary" ? 2 : 1;
       const addition = gScore * relevanceMultiplier;
 
       if (!testScoreMap[test.slug]) {
@@ -88,14 +97,20 @@ export function computeRecommendations(input: ScoringInput): ScoredTest[] {
   }
 
   // Stage D: Apply collection preference multiplier
-  if (collectionPreference && collectionPreference !== 'any') {
+  if (collectionPreference && collectionPreference !== "any") {
     for (const [testSlug, entry] of Object.entries(testScoreMap)) {
       const test = testDataMap[testSlug];
       if (!test) continue;
 
-      if (collectionPreference === 'in-person' && test.collection_method === 'in-person') {
+      if (
+        collectionPreference === "in-person" &&
+        test.collection_method === "in-person"
+      ) {
         entry.score *= 1.3;
-      } else if (collectionPreference === 'at-home' && test.collection_method !== 'in-person') {
+      } else if (
+        collectionPreference === "at-home" &&
+        test.collection_method !== "in-person"
+      ) {
         entry.score *= 1.3;
       }
     }
@@ -133,16 +148,20 @@ export function computeRecommendations(input: ScoringInput): ScoredTest[] {
 
 function getBudgetCeiling(pref: string | null): number | null {
   switch (pref) {
-    case 'low': return 30000;   // Under $300 — covers AHB panels
-    case 'mid': return 70000;   // $300–$700 — covers 10X Gut Health Test, comprehensive, MGT, MitoScreen
-    case 'high': return 100000; // $700–$1,000 — excludes PGT ($1,299)
-    default: return null;       // unlimited — all tests eligible
+    case "low":
+      return 30000; // Under $300 — covers AHB panels
+    case "mid":
+      return 70000; // $300–$700 — covers 10X Gut Health Test, comprehensive, MGT, MitoScreen
+    case "high":
+      return 100000; // $700–$1,000 — excludes PGT ($1,299)
+    default:
+      return null; // unlimited — all tests eligible
   }
 }
 
 export function extractPreferences(
   answers: Record<string, string[]>,
-  questions: QuizQuestion[]
+  questions: QuizQuestion[],
 ): { collectionPreference: string | null; budgetPreference: string | null } {
   let collectionPreference: string | null = null;
   let budgetPreference: string | null = null;
@@ -150,10 +169,13 @@ export function extractPreferences(
   for (const question of questions) {
     const selectedIds = answers[question.id] || [];
     for (const optionId of selectedIds) {
-      const option = question.options.find((o: QuizOption) => o.id === optionId);
+      const option = question.options.find(
+        (o: QuizOption) => o.id === optionId,
+      );
       if (!option?.preferenceFlag) continue;
-      if (question.id === 'collection-preference') collectionPreference = option.preferenceFlag;
-      if (question.id === 'budget') budgetPreference = option.preferenceFlag;
+      if (question.id === "collection-preference")
+        collectionPreference = option.preferenceFlag;
+      if (question.id === "budget") budgetPreference = option.preferenceFlag;
     }
   }
 
@@ -162,13 +184,15 @@ export function extractPreferences(
 
 export function extractGoalScores(
   answers: Record<string, string[]>,
-  questions: QuizQuestion[]
+  questions: QuizQuestion[],
 ): Record<string, number> {
   const goalScores: Record<string, number> = {};
   for (const question of questions) {
     const selectedIds = answers[question.id] || [];
     for (const optionId of selectedIds) {
-      const option = question.options.find((o: QuizOption) => o.id === optionId);
+      const option = question.options.find(
+        (o: QuizOption) => o.id === optionId,
+      );
       if (!option?.goalWeights) continue;
       for (const [goalSlug, weight] of Object.entries(option.goalWeights)) {
         goalScores[goalSlug] = (goalScores[goalSlug] || 0) + weight;

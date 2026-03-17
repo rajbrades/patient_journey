@@ -1,19 +1,19 @@
-import { NextResponse } from 'next/server';
-import { getServiceClient } from '@/lib/supabase';
+import { NextResponse } from "next/server";
+import { getServiceClient } from "@/lib/supabase";
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
   const supabase = getServiceClient();
   const body = await request.json();
 
   const { data, error } = await supabase
-    .from('goal_test_mappings')
+    .from("goal_test_mappings")
     .update(body)
-    .eq('id', id)
-    .select('*, test:tests(*)')
+    .eq("id", id)
+    .select("*, test:tests(*)")
     .single();
 
   if (error) {
@@ -24,15 +24,15 @@ export async function PUT(
 
 export async function DELETE(
   _request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
   const supabase = getServiceClient();
 
   const { error } = await supabase
-    .from('goal_test_mappings')
+    .from("goal_test_mappings")
     .delete()
-    .eq('id', id);
+    .eq("id", id);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });

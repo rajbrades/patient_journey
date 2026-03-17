@@ -15,7 +15,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "10X Health | Stop Guessing, Start Knowing",
-  description: "We uncover and address the real reasons you feel the way you do—so you can keep living the life you love, without being held back by your health.",
+  description:
+    "We uncover and address the real reasons you feel the way you do—so you can keep living the life you love, without being held back by your health.",
 };
 
 export default function RootLayout({

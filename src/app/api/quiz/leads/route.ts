@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { getServiceClient } from '@/lib/supabase';
+import { NextResponse } from "next/server";
+import { getServiceClient } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   const supabase = getServiceClient();
@@ -8,13 +8,13 @@ export async function POST(request: Request) {
   const { first_name, last_name, email } = body;
   if (!first_name || !last_name || !email) {
     return NextResponse.json(
-      { error: 'first_name, last_name, and email are required' },
-      { status: 400 }
+      { error: "first_name, last_name, and email are required" },
+      { status: 400 },
     );
   }
 
   const { data, error } = await supabase
-    .from('quiz_leads')
+    .from("quiz_leads")
     .insert({
       first_name: body.first_name,
       last_name: body.last_name,

@@ -19,7 +19,11 @@ export interface Test {
   category: string;
   biomarkers: string[];
   price_cents: number | null;
-  collection_method: 'in-person' | 'at-home-blood' | 'at-home-saliva' | 'at-home-blood-spot';
+  collection_method:
+    | "in-person"
+    | "at-home-blood"
+    | "at-home-saliva"
+    | "at-home-blood-spot";
   test_group: string | null;
   not_for_you: string | null;
   is_active: boolean;
@@ -31,14 +35,17 @@ export interface GoalTestMapping {
   id: string;
   goal_id: string;
   test_id: string;
-  relevance: 'primary' | 'secondary';
+  relevance: "primary" | "secondary";
   rationale: string | null;
   sort_order: number;
   created_at: string;
 }
 
 export interface GoalWithTests extends Goal {
-  tests: (Test & { relevance: 'primary' | 'secondary'; rationale: string | null })[];
+  tests: (Test & {
+    relevance: "primary" | "secondary";
+    rationale: string | null;
+  })[];
 }
 
 // Quiz types
@@ -47,7 +54,7 @@ export interface QuizQuestion {
   id: string;
   question: string;
   subtitle?: string;
-  type: 'single-select' | 'multi-select';
+  type: "single-select" | "multi-select";
   maxSelections?: number;
   options: QuizOption[];
 }

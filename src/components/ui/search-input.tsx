@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface SearchInputProps {
   onSearch: (query: string) => void;
@@ -10,10 +10,10 @@ interface SearchInputProps {
 
 export function SearchInput({
   onSearch,
-  placeholder = 'What are you looking to improve? (e.g., energy, sleep, gut health)',
+  placeholder = "What are you looking to improve? (e.g., energy, sleep, gut health)",
   debounceMs = 300,
 }: SearchInputProps) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => onSearch(query), debounceMs);
@@ -40,7 +40,7 @@ export function SearchInput({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-base text-gray-900 placeholder-gray-400 shadow-sm transition duration-300 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20"
+        className="w-full border-2 border-black bg-white py-3 pl-11 pr-4 text-base text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-brand focus:outline-none focus:-translate-y-1 focus:-translate-x-1 focus:shadow-solid-brand"
       />
     </div>
   );

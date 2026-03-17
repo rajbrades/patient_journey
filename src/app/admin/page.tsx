@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function AdminDashboard() {
   return (
@@ -7,7 +7,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Link
           href="/admin/goals"
-          className="block rounded-xl border border-gray-200 bg-white p-6 hover:shadow-md transition"
+          className="block  border border-gray-200 bg-white p-6 hover: transition"
         >
           <h2 className="text-lg font-semibold text-gray-900">Health Goals</h2>
           <p className="mt-1 text-sm text-gray-500">
@@ -16,7 +16,7 @@ export default function AdminDashboard() {
         </Link>
         <Link
           href="/admin/tests"
-          className="block rounded-xl border border-gray-200 bg-white p-6 hover:shadow-md transition"
+          className="block  border border-gray-200 bg-white p-6 hover: transition"
         >
           <h2 className="text-lg font-semibold text-gray-900">Lab Tests</h2>
           <p className="mt-1 text-sm text-gray-500">

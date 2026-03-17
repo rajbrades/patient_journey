@@ -13,6 +13,8 @@
   --color-brand-light: #fff5f5;
   --font-sans: var(--font-inter);
   --font-heading: var(--font-oswald);
+  --shadow-solid: 4px 4px 0px 0px #000000;
+  --shadow-solid-brand: 4px 4px 0px 0px var(--color-brand);
 }
 
 body {
@@ -22,8 +24,12 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-oswald), sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }

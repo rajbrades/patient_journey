@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
-import type { GoalWithTests } from '@/types';
-import { TestCard } from '@/components/patient/test-card';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import type { GoalWithTests } from "@/types";
+import { TestCard } from "@/components/patient/test-card";
 
 export default function GoalDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -30,7 +30,7 @@ export default function GoalDetailPage() {
           <div className="h-6 w-96 bg-gray-100 rounded animate-pulse mb-8" />
           <div className="space-y-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-36 rounded-2xl bg-gray-100 animate-pulse" />
+              <div key={i} className="h-36  bg-gray-100 animate-pulse" />
             ))}
           </div>
         </div>
@@ -43,7 +43,10 @@ export default function GoalDetailPage() {
       <main className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900">Goal not found</h1>
-          <Link href="/" className="mt-4 inline-block text-blue-600 hover:underline">
+          <Link
+            href="/"
+            className="mt-4 inline-block text-blue-600 hover:underline"
+          >
             Back to all goals
           </Link>
         </div>
@@ -51,8 +54,8 @@ export default function GoalDetailPage() {
     );
   }
 
-  const primaryTests = goal.tests.filter((t) => t.relevance === 'primary');
-  const secondaryTests = goal.tests.filter((t) => t.relevance === 'secondary');
+  const primaryTests = goal.tests.filter((t) => t.relevance === "primary");
+  const secondaryTests = goal.tests.filter((t) => t.relevance === "secondary");
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -62,8 +65,18 @@ export default function GoalDetailPage() {
             href="/"
             className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
           >
-            <svg className="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="mr-1 h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
             All goals
           </Link>
