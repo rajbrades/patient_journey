@@ -11,7 +11,7 @@ export function GoalCard({ goal }: GoalCardProps) {
   return (
     <Link
       href={`/goals/${goal.slug}`}
-      className="group flex flex-col w-full h-full border-2 border-black bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid"
+      className="group flex flex-col w-full h-full border border-gray-200 rounded-lg bg-white p-6 transition-colors duration-200 hover:border-brand"
     >
       <div className="mb-3 text-3xl">{goal.icon}</div>
       <h3 className="text-lg font-semibold text-gray-900 group-hover:text-brand transition-colors duration-300">

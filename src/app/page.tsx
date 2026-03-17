@@ -13,9 +13,9 @@ export default function Home() {
             className="mt-2 text-lg text-gray-500"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            We uncover and address the real reasons you feel the way you do—so
-            you can keep living the life you love, without being held back by
-            your health.
+            Find the exact lab tests you need to take control of your health.
+            Choose a goal below or take our quick quiz to get personalized
+            recommendations.
           </p>
         </div>
       </header>
@@ -23,11 +23,11 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-4 py-6">
         <Link
           href="/quiz"
-          className="block bg-brand p-6 text-white hover:bg-brand-dark transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid-brand"
+          className="block bg-brand p-6 text-white max-sm:rounded-[5px] sm:rounded-[10px] hover:bg-brand-dark transition-colors duration-200"
         >
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-bold">Not sure where to start?</h2>
+              <h2 className="text-[20px] max-sm:text-[12px] font-heading uppercase font-bold text-white">Not sure where to start?</h2>
               <p
                 className="mt-1 text-white/80"
                 style={{ fontFamily: "var(--font-inter)" }}

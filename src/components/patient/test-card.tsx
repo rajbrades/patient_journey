@@ -22,7 +22,7 @@ export function TestCard({ test }: TestCardProps) {
   };
 
   return (
-    <div className="w-full border-2 border-black bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid">
+    <div className="w-full border border-gray-200 rounded-lg bg-white p-6 transition-colors duration-200 hover:border-brand">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">

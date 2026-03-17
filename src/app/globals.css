@@ -8,13 +8,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand: #d9232a;
+  --color-brand: #d1242a;
   --color-brand-dark: #b01c22;
   --color-brand-light: #fff5f5;
   --font-sans: var(--font-inter);
   --font-heading: var(--font-oswald);
-  --shadow-solid: 4px 4px 0px 0px #000000;
-  --shadow-solid-brand: 4px 4px 0px 0px var(--color-brand);
 }
 
 body {

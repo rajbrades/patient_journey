@@ -172,7 +172,7 @@ export default function QuizContainer() {
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           href="/"
-          className="border-2 border-brand bg-brand px-6 py-3 text-sm font-medium text-white hover:bg-brand-dark transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid-brand"
+          className="max-sm:rounded-[5px] sm:rounded-[10px] bg-brand px-6 py-3 max-sm:text-[12px] sm:text-[20px] font-heading uppercase font-bold text-white hover:bg-brand-dark transition-colors duration-200"
         >
           Explore Health Goals
         </Link>
@@ -184,7 +184,7 @@ export default function QuizContainer() {
             setRecommendations([]);
             setPhase("quiz");
           }}
-          className="border-2 border-black bg-white px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid"
+          className="max-sm:rounded-[5px] sm:rounded-[10px] bg-gray-100 px-6 py-3 max-sm:text-[12px] sm:text-[20px] font-heading uppercase font-bold text-gray-700 hover:bg-gray-200 transition-colors duration-200"
         >
           Retake Quiz
         </button>

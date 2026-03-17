@@ -48,8 +48,8 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
   }
 
   const inputClass = (hasError: boolean) =>
-    `w-full border-2 px-4 py-3 text-sm focus:outline-none focus:border-brand transition-all duration-200 focus:-translate-y-1 focus:-translate-x-1 focus:shadow-solid-brand ${
-      hasError ? "border-red-500" : "border-black"
+    `w-full border rounded-md px-4 py-3 text-sm focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-colors duration-200 ${
+      hasError ? "border-red-500" : "border-gray-300"
     }`;
 
   return (
@@ -141,7 +141,7 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
             type="tel"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className="w-full border-2 border-black px-4 py-3 text-sm focus:outline-none focus:border-brand transition-all duration-200 focus:-translate-y-1 focus:-translate-x-1 focus:shadow-solid-brand"
+            className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-colors duration-200"
             placeholder="(555) 123-4567"
           />
         </div>
@@ -149,7 +149,7 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full border-2 border-brand bg-brand px-6 py-4 text-base font-semibold text-white hover:bg-brand-dark transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid-brand disabled:opacity-60 disabled:translate-y-0 disabled:translate-x-0 disabled:shadow-none"
+          className="w-full max-sm:rounded-[5px] sm:rounded-[10px] bg-brand px-6 py-4 max-sm:text-[12px] sm:text-[20px] font-heading uppercase font-bold text-white hover:bg-brand-dark transition-colors duration-200 disabled:opacity-60"
         >
           {submitting ? "Sending..." : "Get My Personalized Plan"}
         </button>

@@ -63,10 +63,10 @@ export function GoalBrowser() {
           <button
             key={cat.value}
             onClick={() => setCategory(cat.value)}
-            className={`border-2 px-4 py-1.5 text-sm font-medium transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid-brand ${
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-200 ${
               category === cat.value
-                ? "border-brand bg-brand text-white z-10"
-                : "border-black bg-white text-gray-600 hover:z-10"
+                ? "bg-brand text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >
             {cat.label}

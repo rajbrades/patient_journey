@@ -84,7 +84,7 @@ export function QuestionCard({
           <button
             type="button"
             onClick={onBack}
-            className="border-2 border-black bg-white px-6 py-3 text-sm font-medium text-black hover:bg-gray-100 transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid"
+            className="max-sm:rounded-[5px] sm:rounded-[10px] bg-gray-100 px-6 py-3 max-sm:text-[12px] sm:text-[20px] font-heading uppercase font-bold text-gray-700 hover:bg-gray-200 transition-colors duration-200"
           >
             Back
           </button>
@@ -95,7 +95,7 @@ export function QuestionCard({
           type="button"
           onClick={onNext}
           disabled={!canProceed}
-          className="bg-brand border-2 border-brand px-8 py-3 text-sm font-medium text-white hover:bg-brand-dark transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid-brand disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 disabled:translate-x-0 disabled:shadow-none"
+          className="max-sm:rounded-[5px] sm:rounded-[10px] bg-brand px-8 py-3 max-sm:text-[12px] sm:text-[20px] font-heading uppercase font-bold text-white hover:bg-brand-dark transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {isLast ? "Show Me What I Need" : "Next"}
         </button>

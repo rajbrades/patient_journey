@@ -40,7 +40,7 @@ export function SearchInput({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder={placeholder}
-        className="w-full border-2 border-black bg-white py-3 pl-11 pr-4 text-base text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-brand focus:outline-none focus:-translate-y-1 focus:-translate-x-1 focus:shadow-solid-brand"
+        className="w-full border border-gray-300 rounded-md bg-white py-3 pl-11 pr-4 text-base text-gray-900 placeholder-gray-400 transition-colors duration-200 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
       />
     </div>
   );

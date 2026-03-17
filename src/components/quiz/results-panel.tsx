@@ -73,7 +73,7 @@ export function ResultsPanel({
         <button
           type="button"
           onClick={onContinue}
-          className="bg-brand border-2 border-brand px-10 py-4 text-base font-semibold text-white hover:bg-brand-dark transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid-brand"
+          className="max-sm:rounded-[5px] sm:rounded-[10px] bg-brand px-10 py-4 max-sm:text-[12px] sm:text-[20px] font-heading uppercase font-bold text-white hover:bg-brand-dark transition-colors duration-200"
         >
           Take the Next Step
         </button>
@@ -108,8 +108,8 @@ function ResultCard({
 
   return (
     <div
-      className={`w-full border-2 p-6 transition-all duration-200 hover:-translate-y-1 hover:-translate-x-1 ${
-        highlighted ? "border-brand bg-white hover:shadow-solid-brand" : "border-black bg-white hover:shadow-solid"
+      className={`w-full border p-6 rounded-lg transition-colors duration-200 ${
+        highlighted ? "border-brand bg-white" : "border-gray-200 bg-white hover:border-gray-300"
       }`}
     >
       <div className="flex items-start justify-between gap-4">

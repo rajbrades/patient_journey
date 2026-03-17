@@ -17,10 +17,10 @@ export function AnswerOption({
     <button
       type="button"
       onClick={onToggle}
-      className={`relative flex items-center gap-3 border-2 p-4 text-left transition-all duration-200 ${
+      className={`relative flex items-center gap-3 border-2 p-4 text-left transition-colors duration-200 ${
         selected
-          ? "border-brand bg-brand-light -translate-y-1 -translate-x-1 shadow-solid-brand z-10"
-          : "border-black bg-white hover:-translate-y-1 hover:-translate-x-1 hover:shadow-solid hover:z-10"
+          ? "border-black bg-white shadow-[4px_4px_0_0_#000] z-10"
+          : "border-black bg-white hover:bg-gray-50 hover:z-10"
       }`}
     >
       {icon && <span className="text-2xl shrink-0">{icon}</span>}
@@ -39,7 +39,7 @@ export function AnswerOption({
         )}
       </div>
       <div
-        className={`shrink-0 flex h-5 w-5 items-center justify-center border-2 transition-all ${
+        className={`shrink-0 flex h-5 w-5 items-center justify-center border-2 transition-colors ${
           selected ? "border-brand bg-brand" : "border-black"
         }`}
       >
