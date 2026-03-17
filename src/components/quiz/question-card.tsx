@@ -28,7 +28,6 @@ export function QuestionCard({
       onSelect(optionId);
       return;
     }
-    // Multi-select: toggle, respect max
     if (selectedAnswers.includes(optionId)) {
       onSelect(optionId);
     } else if (!atMax) {
@@ -41,7 +40,7 @@ export function QuestionCard({
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-gray-900">{question.question}</h2>
         {question.subtitle && (
-          <p className="mt-2 text-gray-500">{question.subtitle}</p>
+          <p className="mt-2 text-gray-500" style={{ fontFamily: 'var(--font-inter)' }}>{question.subtitle}</p>
         )}
         {question.type === 'multi-select' && atMax && (
           <p className="mt-1 text-sm text-amber-600 font-medium">
@@ -73,7 +72,7 @@ export function QuestionCard({
           <button
             type="button"
             onClick={onBack}
-            className="rounded-xl bg-gray-100 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-200 transition"
+            className="rounded-xl bg-gray-100 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-200 transition duration-300"
           >
             Back
           </button>
@@ -84,7 +83,7 @@ export function QuestionCard({
           type="button"
           onClick={onNext}
           disabled={!canProceed}
-          className="rounded-xl bg-blue-600 px-8 py-3 text-sm font-medium text-white hover:bg-blue-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
+          className="rounded-xl bg-brand px-8 py-3 text-sm font-medium text-white hover:bg-brand-dark transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/30 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none"
         >
           {isLast ? 'Show Me What I Need' : 'Next'}
         </button>

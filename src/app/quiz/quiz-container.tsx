@@ -158,7 +158,7 @@ export default function QuizContainer() {
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           href="/"
-          className="rounded-xl bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700 transition"
+          className="rounded-xl bg-brand px-6 py-3 text-sm font-medium text-white hover:bg-brand-dark transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/30"
         >
           Explore Health Goals
         </Link>

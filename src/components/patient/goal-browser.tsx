@@ -63,9 +63,9 @@ export function GoalBrowser() {
           <button
             key={cat.value}
             onClick={() => setCategory(cat.value)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition duration-300 ${
               category === cat.value
-                ? 'bg-blue-600 text-white shadow-sm'
+                ? 'bg-brand text-white shadow-sm shadow-brand/30'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
@@ -82,7 +82,7 @@ export function GoalBrowser() {
         </div>
       ) : goals.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-500">We couldn't find a match — try a different search or browse the categories above.</p>
+          <p className="text-gray-500">We couldn&apos;t find a match — try a different search or browse the categories above.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

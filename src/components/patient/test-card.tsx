@@ -22,7 +22,7 @@ export function TestCard({ test }: TestCardProps) {
   };
 
   return (
-    <div className="w-full rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+    <div className="w-full rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">
@@ -30,7 +30,7 @@ export function TestCard({ test }: TestCardProps) {
             <span
               className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
                 test.relevance === 'primary'
-                  ? 'bg-blue-50 text-blue-700'
+                  ? 'bg-brand-light text-brand'
                   : 'bg-gray-100 text-gray-600'
               }`}
             >
@@ -40,9 +40,9 @@ export function TestCard({ test }: TestCardProps) {
               {collection.icon} {collection.label}
             </span>
           </div>
-          <p className="mt-1 text-sm text-gray-500">{test.description}</p>
+          <p className="mt-1 text-sm text-gray-500" style={{ fontFamily: 'var(--font-inter)' }}>{test.description}</p>
           {test.rationale && (
-            <p className="mt-2 text-sm font-medium text-blue-600 italic">
+            <p className="mt-2 text-sm font-medium text-brand italic" style={{ fontFamily: 'var(--font-inter)' }}>
               {test.rationale}
             </p>
           )}
@@ -51,7 +51,7 @@ export function TestCard({ test }: TestCardProps) {
               <summary className="text-xs font-medium text-amber-700 cursor-pointer hover:text-amber-800 select-none">
                 This test may not be for you if…
               </summary>
-              <p className="mt-1.5 text-sm text-amber-700 bg-amber-50 rounded-lg px-3 py-2">
+              <p className="mt-1.5 text-sm text-amber-700 bg-amber-50 rounded-lg px-3 py-2" style={{ fontFamily: 'var(--font-inter)' }}>
                 {test.not_for_you}
               </p>
             </details>

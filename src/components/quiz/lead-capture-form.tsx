@@ -37,11 +37,16 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
     }
   }
 
+  const inputClass = (hasError: boolean) =>
+    `w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition duration-300 ${
+      hasError ? 'border-red-300' : 'border-gray-200'
+    }`;
+
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-gray-900">Ready to Feel Better?</h2>
-        <p className="mt-2 text-gray-500">
+        <p className="mt-2 text-gray-500" style={{ fontFamily: 'var(--font-inter)' }}>
           Share your contact info and our wellness team will help you take the next step toward the answers you've been looking for.
         </p>
       </div>
@@ -57,9 +62,7 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
               type="text"
               value={form.first_name}
               onChange={(e) => setForm({ ...form, first_name: e.target.value })}
-              className={`w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 ${
-                errors.first_name ? 'border-red-300' : 'border-gray-200'
-              }`}
+              className={inputClass(!!errors.first_name)}
               placeholder="John"
             />
             {errors.first_name && (
@@ -75,9 +78,7 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
               type="text"
               value={form.last_name}
               onChange={(e) => setForm({ ...form, last_name: e.target.value })}
-              className={`w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 ${
-                errors.last_name ? 'border-red-300' : 'border-gray-200'
-              }`}
+              className={inputClass(!!errors.last_name)}
               placeholder="Doe"
             />
             {errors.last_name && (
@@ -95,9 +96,7 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
             type="email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className={`w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 ${
-              errors.email ? 'border-red-300' : 'border-gray-200'
-            }`}
+            className={inputClass(!!errors.email)}
             placeholder="john@example.com"
           />
           {errors.email && (
@@ -114,7 +113,7 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
             type="tel"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition duration-300"
             placeholder="(555) 123-4567"
           />
         </div>
@@ -122,7 +121,7 @@ export function LeadCaptureForm({ onSubmit }: LeadCaptureFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-xl bg-blue-600 px-6 py-4 text-base font-semibold text-white hover:bg-blue-700 transition disabled:opacity-60 shadow-lg shadow-blue-600/20"
+          className="w-full rounded-xl bg-brand px-6 py-4 text-base font-semibold text-white hover:bg-brand-dark transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand/30 shadow-lg shadow-brand/20 disabled:opacity-60 disabled:translate-y-0 disabled:shadow-none"
         >
           {submitting ? 'Sending...' : 'Get My Personalized Plan'}
         </button>
