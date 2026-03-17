@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import QuizContainer from "./quiz-container";
 import { BrandLogo } from "@/components/ui/brand-logo";
 

@@ -65,7 +65,7 @@ export function QuestionCard({
           return (
             <div
               key={option.id}
-              className={isDisabled ? "opacity-50 pointer-events-none" : ""}
+              className={`h-full ${isDisabled ? "opacity-50 pointer-events-none" : ""}`}
             >
               <AnswerOption
                 label={option.label}

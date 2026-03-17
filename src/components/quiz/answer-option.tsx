@@ -17,7 +17,7 @@ export function AnswerOption({
     <button
       type="button"
       onClick={onToggle}
-      className={`relative flex items-center gap-3 border-2 p-4 text-left transition-colors duration-200 ${
+      className={`relative w-full h-full flex items-center gap-3 border-2 p-4 text-left transition-colors duration-200 ${
         selected
           ? "border-brand bg-white z-10"
           : "border-black bg-white hover:bg-gray-50 hover:z-10"
